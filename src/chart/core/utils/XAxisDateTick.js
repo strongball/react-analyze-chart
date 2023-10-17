@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { hourInterval, minInterval, dayInterval, weekInterval, monthInterval } from '../../../src/constants/resolution';
+import { hourInterval, minInterval, dayInterval, weekInterval, monthInterval } from './resolution';
 
 export const GRID_LINE_WIDTH_DEFAULT = 82;
 const VERTICAL_WEIGHT_HOUR_MIN = -2;
@@ -128,7 +128,13 @@ const getXAxisValuesByYearMonthDay = (xAxisValues) => {
   return xAxisValuesByYearMonthDay;
 };
 
-export const getTimeAxisWithDateAndWeight = (xAxisValues, resolution) => {
+/**
+ * @param {number[]} _xAxisValues
+ * @param {string} resolution
+ * @returns {{u: number, text: string, priority:number }[]}
+ */
+export function getTimeAxisWithDateAndWeight(_xAxisValues, resolution) {
+  const xAxisValues = _xAxisValues.map((d, i) => [i, d]);
   const xAxisValuesByYearMonthDay = getXAxisValuesByYearMonthDay(xAxisValues);
   const xAxisByYear = Object.entries(xAxisValuesByYearMonthDay);
   let timeAxis = [];
@@ -197,38 +203,9 @@ export const getTimeAxisWithDateAndWeight = (xAxisValues, resolution) => {
       });
     });
   });
-  return timeAxis;
-};
-
-export default class {
-  _params = {};
-  _timeAxis = [];
-
-  isSameTimeAxis(current) {
-    const keys = Object.keys(current);
-    const isSame = keys.every((keyName) => Object.is(current[keyName], this._params[keyName]));
-    this._params = current;
-    return isSame;
-  }
-
-  getTimeAxis(xAxisValues, resolution, bandWidth) {
-    if (!(Array.isArray(xAxisValues) && xAxisValues.length && bandWidth && allIntervals.includes(resolution))) {
-      return [];
-    }
-
-    if (this.isSameTimeAxis({ xAxisValues, resolution, bandWidth })) {
-      return this._timeAxis;
-    }
-
-    const gridLineGap = Math.ceil(GRID_LINE_WIDTH_DEFAULT / bandWidth);
-    // assign date and weight into xAxisValues
-    const timeAxisDateWeight = getTimeAxisWithDateAndWeight(xAxisValues, resolution);
-    // add weight into xAxisValue if it's exist in prev timeAxis
-    const persistentTimeAxis = getPersistentXAxis(timeAxisDateWeight, this._timeAxis);
-    // finally filter xAxis which cause the gap xAxis to next xAxis is too narrow
-    const filteredTimeAxis = filterxAxisByWeight(persistentTimeAxis, gridLineGap);
-
-    this._timeAxis = filteredTimeAxis;
-    return this._timeAxis;
-  }
+  return timeAxis.map(([_, u, text, p]) => ({
+    u: u,
+    text: text,
+    priority: p,
+  }));
 }

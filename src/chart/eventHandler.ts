@@ -10,6 +10,9 @@ export function panningX(financialChart: FinancialChart) {
   financialChart.addEventListener('mouseup', (evt) => {
     mouseDownXBase = undefined;
   });
+  financialChart.addEventListener('mouseleave', (evt) => {
+    mouseDownXBase = undefined;
+  });
   financialChart.addEventListener('mousemove', (evt) => {
     if (mouseDownXBase !== undefined) {
       const wantChange = mouseDownXBase - evt.x;

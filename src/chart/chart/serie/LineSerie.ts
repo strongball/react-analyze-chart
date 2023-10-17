@@ -19,6 +19,13 @@ export class LineSerie extends TimeSerie<LineData> {
     super();
     Object.assign(this.config, config);
   }
+  updateConfig(config?: Partial<LineConfig>) {
+    if (!config) {
+      return;
+    }
+    Object.assign(this.config, config);
+    this.updateLayer();
+  }
   hitTest(coordX: number, coordY: number) {
     if (!this.xScale || !this.yScale) {
       return false;

@@ -8,6 +8,8 @@ import { XAxis } from './serie/XAxis';
 
 export interface FinancialChartOptions {
   el: HTMLDivElement;
+  width: number;
+  height: number;
 }
 export class FinancialChart extends Panel<TimeScale, LinearScale> {
   chartPanels: ChartPanel[];
@@ -16,14 +18,14 @@ export class FinancialChart extends Panel<TimeScale, LinearScale> {
 
   rootEle: HTMLTableElement = document.createElement('table');
 
-  constructor({ el }: FinancialChartOptions) {
+  constructor({ el, width, height }: FinancialChartOptions) {
     super({
       el,
       xScale: new TimeScale(),
       yScale: new LinearScale(),
     });
-    this.width = 1600;
-    this.height = 600;
+    this.width = width;
+    this.height = height;
     this.el.appendChild(this.rootEle);
 
     this.chartPanels = [];

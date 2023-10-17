@@ -1,9 +1,9 @@
 import React from 'react';
 
-import StockPage from './pages/StockPage';
+import ChartPage from './pages/ChartPage';
 
 const App: React.FC = (props) => {
-  return <StockPage />;
+  return <ChartPage />;
 };
 
 export default App;

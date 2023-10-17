@@ -2,7 +2,7 @@ import { BoxSize } from '../../types';
 import { Scale } from '../scale/Scale';
 import { Scaleable, ScaleableOptions } from '../scale/Scaleable';
 
-export type PanelEventType = 'click' | 'dblclick' | 'mousedown' | 'mouseup' | 'mousemove' | 'wheel';
+export type PanelEventType = 'click' | 'dblclick' | 'mousedown' | 'mouseup' | 'mousemove' | 'wheel' | 'mouseleave';
 
 export interface PanelEvent<T extends PanelEventType> {
   x: number;

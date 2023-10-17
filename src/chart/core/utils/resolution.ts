@@ -1,0 +1,5 @@
+export const minInterval = ['M1', 'M5', 'M15', 'M30']
+export const hourInterval = ['H1', 'H2', 'H4']
+export const dayInterval = ['D1']
+export const weekInterval = ['W1']
+export const monthInterval = ['MN']
