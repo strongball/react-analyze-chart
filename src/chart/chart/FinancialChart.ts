@@ -2,6 +2,7 @@ import { CanvasPanel } from '../core/panel/CanvasPanel';
 import { Panel } from '../core/panel/interface';
 import { LinearScale } from '../core/scale/LinearScale';
 import { TimeScale } from '../core/scale/TimeScale';
+import { panningX } from '../eventHandler';
 import { NumericalType, Timestamp } from '../types';
 import { ChartPanel } from './panel/ChartPanel';
 import { XAxis } from './serie/XAxis';
@@ -78,5 +79,6 @@ export class FinancialChart extends Panel<TimeScale, LinearScale> {
       this.el.appendChild(chartPanel.el);
     });
     this.el.appendChild(this.xAxisPanel.el);
+    panningX(this);
   }
 }

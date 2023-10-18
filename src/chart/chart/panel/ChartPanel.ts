@@ -2,6 +2,7 @@ import { CanvasPanel } from '../../core/panel/CanvasPanel';
 import { Panel, PanelOptions } from '../../core/panel/interface';
 import { LinearScale } from '../../core/scale/LinearScale';
 import { TimeScale } from '../../core/scale/TimeScale';
+import { chartWheel, panningY } from '../../eventHandler';
 import { YAxis } from '../serie/YAxis';
 import { Plot } from './Plot';
 
@@ -42,6 +43,8 @@ export class ChartPanel extends Panel<TimeScale, never> {
       td.appendChild(tickPanel.el);
       this.el.appendChild(td);
     });
+    panningY(this);
+    chartWheel(this);
   }
 
   watchScaleChange(): void {
@@ -87,6 +90,7 @@ export class ChartPanel extends Panel<TimeScale, never> {
     const yAxis = new YAxis();
     tickPanel.addLayer(yAxis);
 
+    tickPanel.el.style.cursor = 's-resize';
     tickPanel.el.addEventListener('wheel', (evt) => {
       if (plot.yScale) {
         plot.autoReScale = false;

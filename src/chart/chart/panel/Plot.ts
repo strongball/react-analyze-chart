@@ -19,7 +19,7 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
 
   autoReScale = true;
   canvasPanel: CanvasPanel<TimeScale, LinearScale>;
-  subPlots: Plot[] = [];
+  subPlots: Set<Plot> = new Set();
 
   percentageBase?: PercentageBase;
   setPercentageBase(data: PercentageBase) {
@@ -35,7 +35,11 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
   }
 
   addSyncPlot(plot: Plot) {
-    this.subPlots.push(plot);
+    this.subPlots.add(plot);
+    plot.autoReScale = false;
+  }
+  removeSyncPlot(plot: Plot) {
+    this.subPlots.delete(plot);
     plot.autoReScale = false;
   }
   addSerie(serie: Serie<any, TimeScale, LinearScale>) {
@@ -70,7 +74,9 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
         max = max / base - 1;
       }
     }
-    const subRanges = this.subPlots.map((p) => p.getRangeBySeries() ?? []).flat();
+    const subRanges = Array.from(this.subPlots)
+      .map((p) => p.getRangeBySeries() ?? [])
+      .flat();
 
     if (allRanges.length === 0 && subRanges.length === 0) {
       return null;
@@ -90,9 +96,7 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
       return;
     }
     const base = this.getCurrentPercentageBase();
-    if (base) {
-      this.yScale.percentBase = base;
-    }
+    this.yScale.percentBase = base ?? 0;
   }
   syncYScaleBySeries() {
     if (!this.autoReScale) {

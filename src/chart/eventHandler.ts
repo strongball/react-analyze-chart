@@ -44,12 +44,13 @@ export function panningY(target: ChartPanel) {
 }
 export function chartWheel(target: ChartPanel) {
   target.addEventListener('wheel', ({ x, originalEvent }) => {
-    originalEvent.preventDefault();
-    if (target.xScale) {
-      target.xScale.zooming(originalEvent.deltaY / 1000, target.xScale.invert(x));
-    }
-    if (target.xScale) {
-      target.xScale?.move(target.xScale.offset + originalEvent.deltaX);
+    if (target.contentPanel.el.contains(originalEvent.target as HTMLElement)) {
+      if (target.xScale) {
+        target.xScale.zooming(originalEvent.deltaY / 1000, target.xScale.invert(x));
+      }
+      if (target.xScale) {
+        target.xScale?.move(target.xScale.offset + originalEvent.deltaX);
+      }
     }
   });
 }

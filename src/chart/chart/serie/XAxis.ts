@@ -43,12 +43,11 @@ export class XAxis extends Serie<XAxisData, TimeScale, never> {
     if (!this.xScale) {
       return [];
     }
-    const [start, end] = this.xScale!.rangeTimestamp;
     const intervalLine = 82 / this.xScale.gap;
-    const data = sliceDataInView(this.data, {
-      start,
-      end,
-    });
-    return filterxAxisByWeight(data, intervalLine);
+    const filteredData: XAxisData[] = filterxAxisByWeight(this.data, intervalLine);
+    const [start, end] = this.xScale!.rangeTimestamp;
+    const data = sliceDataInView(filteredData, { start, end });
+
+    return data;
   }
 }

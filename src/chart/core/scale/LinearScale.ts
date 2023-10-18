@@ -9,7 +9,7 @@ export class LinearScale extends Scale<number> {
   private _mode: NumericalType = NumericalType.Linear;
   range: [number, number] = [0, 0];
   domain = <[number, number]>[0, 0];
-  private _percentBase?: number;
+  private _percentBase: number = 0;
 
   get mode() {
     return this._mode;

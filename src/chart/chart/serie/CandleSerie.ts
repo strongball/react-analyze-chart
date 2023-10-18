@@ -32,7 +32,7 @@ export class CandleSerie extends TimeSerie<OHLC> {
       const cClose = this.yScale!.convert(v.c);
       const cTop = this.yScale!.convert(v.h);
       const cLow = this.yScale!.convert(v.l);
-
+      // console.log({ o: v.o, cOpen });
       const cOCTop = Math.min(cOpen, cClose);
       const cOCLow = Math.max(cOpen, cClose);
       const color = v.c > v.o ? 'rgb(0, 186, 52)' : 'rgb(233, 44, 44)';

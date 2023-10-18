@@ -38,7 +38,7 @@ export const getPersistentXAxis = (timeAxis, prevTimeAxis) => {
 // removing xAxis if there is not enough width from high weight to low graudually
 export const filterxAxisByWeight = (axis, gridLineGap) => {
   const axisWeightSet = new Set();
-  const timeAxis = axis;
+  const timeAxis = [...axis];
 
   timeAxis.forEach(({ priority }) => {
     axisWeightSet.add(priority);

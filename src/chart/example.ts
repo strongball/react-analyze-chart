@@ -26,9 +26,9 @@ export function init(options: FinancialChartOptions) {
   const financialChart = new FinancialChart(options);
   const chartPanel = financialChart.findOrCreatePanel('main')!;
 
-  panningX(financialChart);
-  panningY(chartPanel);
-  chartWheel(chartPanel);
+  // panningX(financialChart);
+  // panningY(chartPanel);
+  // chartWheel(chartPanel);
 
   const mainPlot = chartPanel.plots[0];
   mainPlot.setPercentageBase(baseData);

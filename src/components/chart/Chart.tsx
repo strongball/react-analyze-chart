@@ -1,14 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FinancialChart } from '../../chart/chart/FinancialChart';
 import { panningX } from '../../chart/eventHandler';
+import { NumericalType } from '../../chart/types';
 
 interface ChartContextProps {
   chart?: FinancialChart;
 }
 export const ChartContext = React.createContext<ChartContextProps>({});
 
-interface Props extends React.PropsWithChildren {}
+interface Props extends React.PropsWithChildren {
+  mode?: NumericalType;
+}
 const Chart: React.FC<Props> = (props) => {
+  const { mode = NumericalType.Linear } = props;
   const [chart, setChart] = useState<FinancialChart>();
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -24,11 +28,10 @@ const Chart: React.FC<Props> = (props) => {
     );
   }, []);
   useEffect(() => {
-    if (!chart) {
-      return;
-    }
-    panningX(chart);
-  }, [chart]);
+    console.log('change mode');
+    chart?.setMainPlotYMode(mode);
+  }, [chart, mode]);
+
   return (
     <ChartContext.Provider value={{ chart }}>
       <div ref={ref} style={{ width: 500, height: 300 }}>
