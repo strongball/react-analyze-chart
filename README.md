@@ -93,8 +93,6 @@ classDiagram
     addPlot(plot: Plot): void
   }
 
-  ChartPanel .. Plot
-  CanvasPanel .. Plot
   class Plot {
     series: Series[]
     percentageBase?: Map~Timestamp, number~
