@@ -103,6 +103,7 @@ export function init(options: FinancialChartOptions) {
   bindHoverEvent(bandSeries);
 
   const lineDrawing = new LineDrawing();
+  console.log(lineDrawing);
   lineDrawing.setData([
     { u: data[data.length - 1].u, y: data[data.length - 1].c },
     { u: data[data.length - 20].u, y: data[data.length - 20].c },

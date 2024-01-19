@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SimplaeChart from '../components/SimplaeChart';
 import AnalyzeChart from '../components/AnalyzeChart';
 import { QQQ, VIX } from '../chart/data';
 import { NumericalType } from '../chart/types';

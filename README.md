@@ -1,6 +1,14 @@
 # React Chart(canvas)
+## Integrate with react
+More user controll options. But less feature  
 [DEMO](https://strongball.github.io/react-analyze-chart/)  
-![Preview](/preview.png?raw=true "Preview")
+![Preview](/preview.png?raw=true "Preview")  
+
+## Javascript only
+More feature including drawing. But most features are hard code.  
+[DEMO](https://strongball.github.io/react-analyze-chart/#/jsonly)  
+![Preview](/preview-js.png?raw=true "Preview")  
+
 ## Class
 
 ### ClassDiagram

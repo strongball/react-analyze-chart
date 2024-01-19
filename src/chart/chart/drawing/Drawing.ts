@@ -30,6 +30,9 @@ export abstract class Drawing extends TimeSerie<Point> {
   getRange() {
     return null;
   }
+  getDataInView() {
+    return this.data;
+  }
   getDataInViewKey(): string {
     if (!this.yScale) {
       return '';

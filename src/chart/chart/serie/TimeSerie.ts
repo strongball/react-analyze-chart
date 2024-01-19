@@ -25,6 +25,7 @@ export abstract class TimeSerie<T extends TimeValueData> extends Serie<T, TimeSc
       return [];
     }
     const [start, end] = this.xScale!.rangeTimestamp;
+    console.log(start, end);
     const data = sliceDataInView(this.data, {
       start,
       end,
