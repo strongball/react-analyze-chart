@@ -1,5 +1,5 @@
 # React Chart(canvas)
-[DEMO](https://strongball.github.io/react-analyze-chart/)
+[DEMO](https://strongball.github.io/react-analyze-chart/)  
 ![Preview](/preview.png?raw=true "Preview")
 ## Class
 
