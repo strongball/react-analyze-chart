@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: '/react-chart-canvas',
+    base: '/react-analyze-chart',
     plugins: [react()],
     test: {
         globals: true,
