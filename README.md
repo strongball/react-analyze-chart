@@ -20,13 +20,13 @@ More functions including drawing and mutiple Y ticks. But most functions are har
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Scale          | Manage data and canvas domain. Convert data to canvas coordinates.                                                                         |
 | Panel          | Having scale and html element.                                                                                                             |
-| CanvasPanel    | Having a real canvas element. All layer render on this one.                                                                                |
-| FinancialChart | Having multiple ChartPanels. The root and entry point of all panel.                                                                        |
+| CanvasPanel    | Having a real canvas element. All layers render on this one.                                                                                |
+| FinancialChart | Having multiple ChartPanels. The root and entry point of all panels.                                                                        |
 | ChartPanel     | Basic chart element. Having multiple CanvasPanels. One for chart content and several y-axis panels                                         |
 | Plot           | Virtual class. To support different YScale in one ChartPanel(CanvasPanel)                                                                  |
 | Layer          | The minimal unit to draw on canvas.                                                                                                        |
-| Series         | Extends layer. Received data and draw items on canvas.                                                                                     |
-| Painter        | Core drawing tool. Providing basic drawing method to help layer draw item on canvas. Can be implemented in different tech(canvas2D, WebGL) |
+| Series         | Extends layer. Received data and drew items on canvas.                                                                                     |
+| Painter        | Core drawing tool. Providing basic drawing methods to help layer draw items on canvas. Can be implemented in different way               |
 
 ## Feature
 
