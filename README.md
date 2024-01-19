@@ -7,33 +7,6 @@
 
 ```mermaid
 classDiagram
-  class Scale~T~ {
-    range: [T, T]
-    domain: [number, number]
-
-    convert(v: T): number
-    invert(pixel: number): T
-    addScaleListener(cb): void
-    removeScaleListener(cb): void
-
-    move(pixel: number)
-    zoom(z: number)
-  }
-
-  NumberScale --|> Scale
-  class NumberScale {
-    mode: Linear|Log|%
-    percentBase: number
-  }
-
-  TimeScale --|> Scale
-  class TimeScale {
-    ticks: Timetamp[]
-    rangeTimestamp: [Timetamp, Timetamp]
-  }
-
-
-  Scaleable .. Scale
   class Scaleable {
     xScale: Scale
     yScale: Scale
@@ -115,6 +88,44 @@ classDiagram
     findOrCreatePanel(key string) ChartPanel
     addChartPanel(chartPanel ChartPanel) void
   }
+```
+
+``` mermaid
+classDiagram
+  class Scale~T~ {
+    range: [T, T]
+    domain: [number, number]
+
+    convert(v: T): number
+    invert(pixel: number): T
+    addScaleListener(cb): void
+    removeScaleListener(cb): void
+
+    move(pixel: number)
+    zoom(z: number)
+  }
+
+  NumberScale --|> Scale
+  class NumberScale {
+    mode: Linear|Log|%
+    percentBase: number
+  }
+
+  TimeScale --|> Scale
+  class TimeScale {
+    ticks: Timetamp[]
+    rangeTimestamp: [Timetamp, Timetamp]
+  }
+
+
+  Scaleable .. Scale
+  class Scaleable {
+    xScale: Scale
+    yScale: Scale
+
+    onScaleChange()
+  }
+
 ```
 
 ### Description
