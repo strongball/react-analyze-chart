@@ -12,7 +12,7 @@ interface Props extends React.PropsWithChildren {
   mode?: NumericalType;
 }
 const Chart: React.FC<Props> = (props) => {
-  const { mode = NumericalType.Linear } = props;
+  const { mode = 'Linear' } = props;
   const [chart, setChart] = useState<FinancialChart>();
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {

@@ -23,7 +23,7 @@ export class BackgroundY extends Serie<number, TimeScale, LinearScale> {
         width: 1,
       });
     });
-    if (this.yScale.mode === NumericalType.Percentage) {
+    if (this.yScale.mode === 'Percentage') {
       const coordY = this.yScale!.convert(this.yScale.percentBase);
       this.painter.drawLine({
         points: [
@@ -46,7 +46,7 @@ export class BackgroundY extends Serie<number, TimeScale, LinearScale> {
       r: this.yScale,
       m: this.yScale.mode,
       h: this.height,
-      b: this.yScale.mode === NumericalType.Percentage ? this.yScale.percentBase : '',
+      b: this.yScale.mode === 'Percentage' ? this.yScale.percentBase : '',
     });
   }
   getDataInView(): number[] {
@@ -65,7 +65,7 @@ export class BackgroundY extends Serie<number, TimeScale, LinearScale> {
       data.push(v);
       v += gap;
     }
-    if (this.yScale.mode === NumericalType.Percentage) {
+    if (this.yScale.mode === 'Percentage') {
       data = data.map((d) => (1 + d) * this.yScale!.percentBase);
     }
     return data;

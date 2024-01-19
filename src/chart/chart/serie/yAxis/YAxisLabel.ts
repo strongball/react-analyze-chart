@@ -19,7 +19,7 @@ export class YAxisLabel extends Serie<LabelData, never, LinearScale> {
       let label = text;
       if (!label) {
         label =
-          this.yScale!.mode === NumericalType.Percentage
+          this.yScale!.mode === 'Percentage'
             ? `${((value / this.yScale!.percentBase - 1) * 100).toFixed(2)}%`
             : value.toFixed(2);
       }
@@ -49,7 +49,7 @@ export class YAxisLabel extends Serie<LabelData, never, LinearScale> {
     return JSON.stringify({
       m: this.yScale.mode,
       h: this.height,
-      b: this.yScale.mode === NumericalType.Percentage ? this.yScale.percentBase : '',
+      b: this.yScale.mode === 'Percentage' ? this.yScale.percentBase : '',
     });
   }
   getDataInView(): LabelData[] {

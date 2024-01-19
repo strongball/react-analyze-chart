@@ -87,13 +87,13 @@ financialChart.addEventListener('mousemove', (evt) => {
 });
 
 document.getElementById('m-linear')!.onclick = () => {
-  financialChart.setMainPlotYMode(NumericalType.Linear);
+  financialChart.setMainPlotYMode('Linear');
 };
 document.getElementById('m-log')!.onclick = () => {
-  financialChart.setMainPlotYMode(NumericalType.Log);
+  financialChart.setMainPlotYMode('Log');
 };
 document.getElementById('m-percent')!.onclick = () => {
-  financialChart.setMainPlotYMode(NumericalType.Percentage);
+  financialChart.setMainPlotYMode('Percentage');
 };
 
 document.getElementById('w-400')!.onclick = () => {

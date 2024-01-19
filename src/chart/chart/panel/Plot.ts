@@ -14,7 +14,7 @@ export type PercentageBase = Map<Timestamp, number>;
 
 export class Plot extends Scaleable<TimeScale, LinearScale> {
   private _series: Serie[] = [];
-  private _safeSyncYScaleBySeries: this['syncYScaleBySeries'];
+  private safeSyncYScaleBySeries: this['syncYScaleBySeries'];
   private _paddingY?: [number, number];
 
   autoReScale = true;
@@ -30,30 +30,33 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
     this.canvasPanel = canvasPanel;
     this._paddingY = paddingY;
     this.addScaleListener(this.watchScaleChange.bind(this));
-    this._safeSyncYScaleBySeries = this.syncYScaleBySeries.bind(this);
+    this.safeSyncYScaleBySeries = this.syncYScaleBySeries.bind(this);
     this.bindHTMLEvent();
   }
 
   addSyncPlot(plot: Plot) {
     this.subPlots.add(plot);
     plot.autoReScale = false;
+    plot.safeSyncYScaleBySeries = this.safeSyncYScaleBySeries;
   }
   removeSyncPlot(plot: Plot) {
     this.subPlots.delete(plot);
-    plot.autoReScale = false;
+    plot.autoReScale = true;
+    plot.safeSyncYScaleBySeries = plot.syncYScaleBySeries.bind(plot);
+    this.safeSyncYScaleBySeries();
   }
   addSerie(serie: Serie<any, TimeScale, LinearScale>) {
     this._series.push(serie);
     serie.yScale = this.yScale;
     this.canvasPanel.addLayer(serie);
-    serie.addViewRangeListener(this._safeSyncYScaleBySeries);
+    serie.addViewRangeListener(this.safeSyncYScaleBySeries);
     this.syncYScaleBySeries();
   }
   removeSerie(serie: Serie<any, TimeScale, LinearScale>) {
     this._series = this._series.filter((s) => s !== serie);
     serie.yScale = undefined;
     this.canvasPanel.removeLayer(serie);
-    serie.removeViewRangeListener(this._safeSyncYScaleBySeries);
+    serie.removeViewRangeListener(this.safeSyncYScaleBySeries);
     this.syncYScaleBySeries();
   }
 
@@ -67,7 +70,7 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
       .flat();
     let min = Math.min(...allRanges);
     let max = Math.max(...allRanges);
-    if (this.yScale?.mode === NumericalType.Percentage) {
+    if (this.yScale?.mode === 'Percentage') {
       const base = this.getCurrentPercentageBase();
       if (base) {
         min = min / base - 1;
@@ -121,7 +124,7 @@ export class Plot extends Scaleable<TimeScale, LinearScale> {
   }
   private watchScaleChange() {
     this.updatePercentBase();
-    this.syncYScaleBySeries();
+    this.safeSyncYScaleBySeries();
     this.syncSubPlots();
   }
   private mouseEventListeners: {

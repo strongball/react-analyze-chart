@@ -6,7 +6,7 @@ export const linear =
   (x) =>
     r0 + ((x - d0) * (r1 - r0)) / (d1 - d0);
 export class LinearScale extends Scale<number> {
-  private _mode: NumericalType = NumericalType.Linear;
+  private _mode: NumericalType = 'Linear';
   range: [number, number] = [0, 0];
   domain = <[number, number]>[0, 0];
   private _percentBase: number = 0;
@@ -34,7 +34,7 @@ export class LinearScale extends Scale<number> {
       return;
     }
     this._percentBase = p;
-    if (this.mode === NumericalType.Percentage) {
+    if (this.mode === 'Percentage') {
       this.triggerScaleListener();
     }
   }
@@ -43,7 +43,7 @@ export class LinearScale extends Scale<number> {
       this.invert(this.domain[0] + changePixel),
       this.invert(this.domain[1] + changePixel),
     ];
-    if (this.mode === NumericalType.Percentage) {
+    if (this.mode === 'Percentage') {
       newRange[0] = newRange[0] / this.percentBase - 1;
       newRange[1] = newRange[1] / this.percentBase - 1;
     }
@@ -55,12 +55,12 @@ export class LinearScale extends Scale<number> {
 
   convert(v: number): number {
     switch (this.mode) {
-      case NumericalType.Log: {
+      case 'Log': {
         return linear([Math.log(this.range[0]), Math.log(this.range[1])], this.domainInRange)(Math.log(v));
       }
-      case NumericalType.Percentage:
+      case 'Percentage':
         return linear(this.range, this.domainInRange)(v / this.percentBase - 1);
-      case NumericalType.Linear:
+      case 'Linear':
       default: {
         return linear(this.range, this.domainInRange)(v);
       }
@@ -68,12 +68,12 @@ export class LinearScale extends Scale<number> {
   }
   invert(p: number): number {
     switch (this.mode) {
-      case NumericalType.Log: {
+      case 'Log': {
         return Math.exp(linear(this.domainInRange, [Math.log(this.range[0]), Math.log(this.range[1])])(p));
       }
-      case NumericalType.Percentage:
+      case 'Percentage':
         return this.percentBase * (1 + linear(this.domainInRange, this.range)(p));
-      case NumericalType.Linear:
+      case 'Linear':
       default: {
         return linear(this.domainInRange, this.range)(p);
       }

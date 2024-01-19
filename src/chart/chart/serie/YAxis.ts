@@ -35,7 +35,7 @@ export class YAxis extends Serie<YAxisData, never, LinearScale> {
       r: this.yScale,
       m: this.yScale.mode,
       h: this.height,
-      b: this.yScale.mode === NumericalType.Percentage ? this.yScale.percentBase : '',
+      b: this.yScale.mode === 'Percentage' ? this.yScale.percentBase : '',
     });
   }
   getDataInView(): YAxisData[] {
@@ -54,7 +54,7 @@ export class YAxis extends Serie<YAxisData, never, LinearScale> {
       v += gap;
     }
     let dataWithText: YAxisData[] = [];
-    if (this.yScale.mode === NumericalType.Percentage) {
+    if (this.yScale.mode === 'Percentage') {
       dataWithText = data.map((d) => ({
         text: `${(d * 100).toFixed(2)}%`,
         value: (1 + d) * this.yScale!.percentBase,
