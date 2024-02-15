@@ -7,7 +7,7 @@ import { Background } from '../chart/chart/serie/Background';
 import { BackgroundY } from '../chart/chart/serie/BackgroundY';
 import { QQQ } from '../chart/data';
 import { LineDrawing } from '../chart/chart/drawing/LineDrawing';
-import { getTimeAxisWithDateAndWeight } from '../chart/core/utils/XAxisDateTick';
+import { addWeight } from '../chart/core/utils/XAxisDateTick';
 
 import { indicatorMovingAverage } from '@d3fc/d3fc-technical-indicator';
 import { YAxisLabel } from './chart/serie/yAxis/YAxisLabel';
@@ -18,7 +18,7 @@ import { BandSeries } from './chart/serie/BandSeries';
 const data = QQQ;
 
 export function init(options: FinancialChartOptions) {
-  const date = getTimeAxisWithDateAndWeight(
+  const date = addWeight(
     data.map((item) => item.u),
     'M1'
   );
@@ -103,7 +103,6 @@ export function init(options: FinancialChartOptions) {
   bindHoverEvent(bandSeries);
 
   const lineDrawing = new LineDrawing();
-  console.log(lineDrawing);
   lineDrawing.setData([
     { u: data[data.length - 1].u, y: data[data.length - 1].c },
     { u: data[data.length - 20].u, y: data[data.length - 20].c },

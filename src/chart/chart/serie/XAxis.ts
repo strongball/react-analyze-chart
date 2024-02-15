@@ -1,14 +1,10 @@
 import { TimeScale } from '../../core/scale/TimeScale';
-import { filterxAxisByWeight } from '../../core/utils/XAxisDateTick';
+import { DataTimeWithWeight, filterxAxisByWeight } from '../../core/utils/XAxisDateTick';
 import { Timestamp } from '../../types';
 import { Serie } from './Serie';
 import { sliceDataInView } from './utils';
 
-export interface XAxisData {
-  u: Timestamp;
-  text: string;
-  priority: number;
-}
+export type XAxisData = DataTimeWithWeight;
 export class XAxis extends Serie<XAxisData, TimeScale, never> {
   hitTest(x: number, y: number) {
     return false;

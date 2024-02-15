@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Background } from '../../../chart/chart/serie/Background';
-import { getTimeAxisWithDateAndWeight } from '../../../chart/core/utils/XAxisDateTick';
+import { addWeight } from '../../../chart/core/utils/XAxisDateTick';
 import { ChartContext } from '../Chart';
 import { PlotContext } from '../Plot';
 
@@ -27,7 +27,7 @@ const BackgroundSeries: React.FC<Props> = (props) => {
     if (!chart || !series || !plot) {
       return;
     }
-    const date = getTimeAxisWithDateAndWeight(data, 'M1');
+    const date = addWeight(data, 'M1');
     series.setData(date);
     // const baseData = data.reduce((m, d) => m.set(d.u, d.o), new Map());
     // plot.setPercentageBase(baseData);

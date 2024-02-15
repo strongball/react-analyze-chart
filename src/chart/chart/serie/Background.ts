@@ -1,4 +1,4 @@
-import { filterxAxisByWeight } from '../../core/utils/XAxisDateTick';
+import { addWeight, filterxAxisByWeight } from '../../core/utils/XAxisDateTick';
 import { TimeSerie } from './TimeSerie';
 import { sliceDataInView } from './utils';
 import { XAxisData } from './XAxis';
@@ -46,6 +46,7 @@ export class Background extends TimeSerie<XAxisData> {
       start,
       end,
     });
-    return filterxAxisByWeight(data, intervalLine);
+    const filtered = filterxAxisByWeight(data, intervalLine).map((d) => d.u);
+    return addWeight(filtered, {});
   }
 }
